@@ -46,6 +46,22 @@ pass="the_pass"
 ---
 
 
+Allow Execution
+----------------------------------
+
+chmod a+x /usr/local/linux-backup/mysql/daily
+chmod a+x /usr/local/linux-backup/mysql/weekly
+chmod a+x /usr/local/linux-backup/mysql/monthly
+
+
+Test the Scripts
+----------------------------------
+
+/usr/local/linux-backup/mysql/daily
+/usr/local/linux-backup/mysql/weekly
+/usr/local/linux-backup/mysql/monthly
+
+
 Setup Cron Tasks
 ----------------------------------
 
@@ -56,13 +72,6 @@ crontab -e
 45 1 2 * * /usr/local/linux-backup/mysql/monthly
 ---
 
-
-Test the Scripts
-----------------------------------
-
-/usr/local/linux-backup/mysql/daily
-/usr/local/linux-backup/mysql/weekly
-/usr/local/linux-backup/mysql/monthly
 
 
 Restoring Data
