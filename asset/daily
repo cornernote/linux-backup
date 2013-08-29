@@ -1,0 +1,23 @@
+#!/bin/sh
+
+################################################################################
+# Linux Backup
+################################################################################
+# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Source Code: https://github.com/cornernote/linux-backup
+# License: GPLv3
+################################################################################
+
+#
+# Daily Asset Backup
+#
+
+SOURCE=/path/to/asset/
+BACKUPDIR=/backup/asset/daily/
+BACKUPDAYS=14
+
+RDIFFBACKUP=`which rdiff-backup`
+
+# latest daily backup
+${RDIFFBACKUP} ${SOURCE} ${BACKUPDIR}
+${RDIFFBACKUP} --force --remove-older-than ${BACKUPDAYS}D ${BACKUPDIR}

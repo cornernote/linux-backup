@@ -1,0 +1,27 @@
+#!/bin/sh
+
+################################################################################
+# Linux Backup
+################################################################################
+# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Source Code: https://github.com/cornernote/linux-backup
+# License: GPLv3
+################################################################################
+
+#
+# Weekly Asset Backup
+#
+
+BACKUPDAILYDIR=/backup/asset/daily/
+BACKUPDIR=/backup/asset/weekly/
+BACKUPFILE=`date +"%Y-%m-%d"`.tgz
+BACKUPDAYS=56
+
+TAR=`which tar`
+FIND=`which find`
+
+# latest daily backup
+${TAR} cfzP ${BACKUPDIR}${BACKUPFILE} ${BACKUPDAILYDIR}
+
+# delete old backups
+${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -print -exec rm -r {} \;

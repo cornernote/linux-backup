@@ -1,0 +1,29 @@
+#!/bin/sh
+
+################################################################################
+# Linux Backup
+################################################################################
+# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Source Code: https://github.com/cornernote/linux-backup
+# License: GPLv3
+################################################################################
+
+#
+# Monthly MySQL Backup
+#
+
+BACKUPDAILYDIR=/backup/mysql/daily/
+BACKUPDIR=/backup/mysql/monthly/
+BACKUPFOLDER=`date -d 'yesterday' +"%Y-%m-%d"`
+BACKUPDAYS=365
+
+FIND=`which find`
+MKDIR=`which mkdir`
+
+# copy daily backup
+${MKDIR} ${BACKUPDIR}${BACKUPFOLDER}
+${FIND} ${BACKUPDAILYDIR}${BACKUPFOLDER} -exec cp -R {} ${BACKUPDIR}${BACKUPFOLDER}      \;
+
+# delete old backups
+${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -print -exec rm -r {} \;
+${FIND} ${BACKUPDIR} -type d -empty -exec rmdir {} \;

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+################################################################################
+# Linux Backup
+################################################################################
+# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Source Code: https://github.com/cornernote/linux-backup
+# License: GPLv3
+################################################################################
+
+#
+# Daily MySQL Backup
+#
+
+BACKUPDIR=/backup/mysql/daily/
+BACKUPFOLDER=`date +"%Y-%m-%d"`
+BACKUPDAYS=14
+
+MYSQLDUMP=`which mysqldump`
+MYDUMPER=`which mydumper`
+FIND=`which find`
+MKDIR=`which mkdir`
+
+# daily backup
+${MKDIR} ${BACKUPDIR}${BACKUPFOLDER}
+${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPFOLDER} -c
+
+# schema backup
+# ${MYSQLDUMP} --no-data --all-databases > ${BACKUPDIR}${BACKUPFOLDER}/_schema.sql
+DATABASES=$( mysql -D mysql --skip-column-names -B -e 'show databases;' | egrep -v 'information_schema' );
+for i in $DATABASES ; do
+    if [ ${i} != "performance_schema" ] ; then
+        ${MYSQLDUMP} --no-data ${i} > ${BACKUPDIR}${BACKUPFOLDER}/${i}._schema.sql
+        gzip -9fq ${BACKUPDIR}${BACKUPFOLDER}/${i}._schema.sql
+    fi
+done
+
+# delete old backups
+${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -print -exec rm {} \;
+${FIND} ${BACKUPDIR} -type d -empty -exec rmdir {} \;
