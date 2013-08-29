@@ -38,9 +38,9 @@ mkdir /backup/asset/monthly
 Allow Execution
 ----------------------------------
 
-chmod a+x /usr/local/linux-backup/mysql/daily
-chmod a+x /usr/local/linux-backup/mysql/weekly
-chmod a+x /usr/local/linux-backup/mysql/monthly
+chmod a+x /usr/local/linux-backup/asset/daily
+chmod a+x /usr/local/linux-backup/asset/weekly
+chmod a+x /usr/local/linux-backup/asset/monthly
 
 
 Test the Scripts
