@@ -35,6 +35,22 @@ mkdir /backup/asset/weekly
 mkdir /backup/asset/monthly
 
 
+Allow Execution
+----------------------------------
+
+chmod a+x /usr/local/linux-backup/mysql/daily
+chmod a+x /usr/local/linux-backup/mysql/weekly
+chmod a+x /usr/local/linux-backup/mysql/monthly
+
+
+Test the Scripts
+----------------------------------
+
+/usr/local/linux-backup/asset/daily
+/usr/local/linux-backup/asset/weekly
+/usr/local/linux-backup/asset/monthly
+
+
 Setup Cron Tasks
 ----------------------------------
 
@@ -44,14 +60,6 @@ crontab -e
 30 1 * * 1 /usr/local/linux-backup/asset/weekly
 45 1 2 * * /usr/local/linux-backup/asset/monthly
 ---
-
-
-Test the Scripts
-----------------------------------
-
-/usr/local/linux-backup/asset/daily
-/usr/local/linux-backup/asset/weekly
-/usr/local/linux-backup/asset/monthly
 
 
 Restoring Data
