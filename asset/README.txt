@@ -60,17 +60,3 @@ crontab -e
 30 1 * * 1 /usr/local/linux-backup/asset/weekly
 45 1 2 * * /usr/local/linux-backup/asset/monthly
 ---
-
-
-Restoring Data
-----------------------------------
-
-single thread:
----
-zcat /backup/mysql/daily/2009-04-08-00/* | mysql dbname
----
-
-multi thread:
----
-echo *.sql.gz | xargs -n1 -P 16 -I % sh -c 'zcat % | mysql dbname'
----
