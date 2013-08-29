@@ -14,7 +14,7 @@
 
 BACKUPDAILYDIR=/backup/mysql/daily/
 BACKUPDIR=/backup/mysql/weekly/
-BACKUPFOLDER=`date -d 'yesterday' +"%Y-%m-%d"`
+BACKUPFOLDER=`date +"%Y-%m-%d"`
 BACKUPDAYS=56
 
 FIND=`which find`
