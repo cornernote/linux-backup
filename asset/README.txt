@@ -43,6 +43,12 @@ chmod a+x /usr/local/linux-backup/asset/weekly
 chmod a+x /usr/local/linux-backup/asset/monthly
 
 
+Modify Script
+----------------------------------
+
+change asset path in /usr/local/linux-backup/asset/daily
+
+
 Test the Scripts
 ----------------------------------
 
