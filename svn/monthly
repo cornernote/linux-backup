@@ -1,0 +1,30 @@
+#!/bin/sh
+
+################################################################################
+# Linux Backup
+################################################################################
+# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Source Code: https://github.com/cornernote/linux-backup
+# License: GPLv3
+################################################################################
+
+#
+# Monthly SVN Backup
+#
+
+BACKUPDAILYDIR=/backup/svn/daily/
+BACKUPDIR=/backup/svn/monthly/
+BACKUPFOLDER=`date +"%Y-%m-%d"`
+BACKUPDAYS=365
+
+FIND=`which find`
+MKDIR=`which mkdir`
+RSYNC=`which rsync`
+
+# copy latest daily backup
+${MKDIR} ${BACKUPDIR}${BACKUPFOLDER}
+${RSYNC} -a ${BACKUPDAILYDIR} ${BACKUPDIR}${BACKUPFOLDER}
+
+# delete old backups
+${FIND} ${BACKUPDIR} -type f -mtime +${BACKUPDAYS} -delete
+${FIND} ${BACKUPDIR} -type d -empty -delete
