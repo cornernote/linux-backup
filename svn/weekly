@@ -17,12 +17,10 @@ BACKUPDIR=/backup/svn/weekly/
 BACKUPFOLDER=`date +"%Y-%m-%d"`
 BACKUPDAYS=56
 
-FIND=`which find`
-MKDIR=`which mkdir`
 RSYNC=`which rsync`
+FIND=`which find`
 
 # copy latest daily backup
-${MKDIR} ${BACKUPDIR}${BACKUPFOLDER}
 ${RSYNC} -a ${BACKUPDAILYDIR} ${BACKUPDIR}${BACKUPFOLDER}
 
 # delete old backups

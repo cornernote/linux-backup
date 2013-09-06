@@ -16,13 +16,10 @@ BACKUPDIR=/backup/mysql/daily/
 BACKUPFOLDER=`date +"%Y-%m-%d"`
 BACKUPDAYS=14
 
-MYSQLDUMP=`which mysqldump`
 MYDUMPER=`which mydumper`
 FIND=`which find`
-MKDIR=`which mkdir`
 
 # daily backup
-${MKDIR} ${BACKUPDIR}${BACKUPFOLDER}
 ${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPFOLDER} -c
 
 # delete old backups
