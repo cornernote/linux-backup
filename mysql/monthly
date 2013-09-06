@@ -18,12 +18,11 @@ BACKUPFOLDER=`date +"%Y-%m-%d"`
 BACKUPDAYS=365
 
 FIND=`which find`
-MKDIR=`which mkdir`
+RSYNC=`which rsync`
 
 # copy daily backup
-${MKDIR} ${BACKUPDIR}${BACKUPFOLDER}
-${FIND} ${BACKUPDAILYDIR}${BACKUPFOLDER} -exec cp -R {} ${BACKUPDIR}${BACKUPFOLDER}      \;
+${RSYNC} -a ${BACKUPDAILYDIR}${BACKUPFOLDER} ${BACKUPDIR}
 
 # delete old backups
-${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -print -exec rm -r {} \;
-${FIND} ${BACKUPDIR} -type d -empty -exec rmdir {} \;
+${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -delete
+${FIND} ${BACKUPDIR} -type d -empty -delete

@@ -24,4 +24,4 @@ FIND=`which find`
 ${TAR} cfzP ${BACKUPDIR}${BACKUPFILE} ${BACKUPDAILYDIR}
 
 # delete old backups
-${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -print -exec rm -r {} \;
+${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -delete
