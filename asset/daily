@@ -20,4 +20,4 @@ RDIFFBACKUP=`which rdiff-backup`
 
 # latest daily backup
 ${RDIFFBACKUP} ${SOURCE} ${BACKUPDIR}
-${RDIFFBACKUP} --force --remove-older-than ${BACKUPDAYS}D ${BACKUPDIR}
+${RDIFFBACKUP} -v2 --force --remove-older-than ${BACKUPDAYS}D ${BACKUPDIR}
