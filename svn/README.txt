@@ -56,7 +56,7 @@ Setup Cron Tasks
 
 crontab -e
 ---
-0 0 * * * /usr/local/linux-backup/svn/daily
-30 1 * * 1 /usr/local/linux-backup/svn/weekly
-45 1 2 * * /usr/local/linux-backup/svn/monthly
+0 2 * * * /usr/local/linux-backup/svn/daily
+30 3 * * 1 /usr/local/linux-backup/svn/weekly
+45 3 2 * * /usr/local/linux-backup/svn/monthly
 ---
