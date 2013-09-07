@@ -24,5 +24,5 @@ do
     fi
 
         #taking backup (1 revision per dump)
-    svn-backup-dumps --deltas -z -c 1 ${SOURCE}${line} ${BACKUPDIR}${line}
+    svn-backup-dumps --deltas -q -z -c 1 ${SOURCE}${line} ${BACKUPDIR}${line}
 done
