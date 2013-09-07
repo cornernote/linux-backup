@@ -44,10 +44,55 @@ Test the Scripts
 Add to Nagios Client
 ----------------------------------
 
-edit /etc/nagios/nrpe_local.cfg
+edit /etc/nagios3/nrpe_local.cfg
 
 command[check_backup_mysql]=/usr/local/linux-backup/_nagios_plugins/check_backup_mysql
 command[check_backup_redmine]=/usr/local/linux-backup/_nagios_plugins/check_backup_redmine
 command[check_backup_vhosts]=/usr/local/linux-backup/_nagios_plugins/check_backup_vhosts
 command[check_backup_svn]=/usr/local/linux-backup/_nagios_plugins/check_backup_svn
 
+
+Add to Nagios Server
+----------------------------------
+
+edit /etc/nagios3/conf.d/yourhost.cfg
+
+define host{
+        use                     generic-host
+        host_name               yourhost
+        alias                   your host
+        address                 host.local
+        }
+
+# check_backup_mysql
+define service{
+        use                     generic-service
+        host_name               yourhost
+        service_description     MySQL Backup
+        check_command           check_nrpe_1arg!check_backup_mysql
+        }
+              
+# check_backup_redmine
+define service{
+        use                     generic-service
+        host_name               yourhost
+        service_description     Redmine Backup
+        check_command           check_nrpe_1arg!check_backup_redmine
+        }
+              
+# check_backup_svn
+define service{
+        use                     generic-service
+        host_name               yourhost
+        service_description     SVN Backup
+        check_command           check_nrpe_1arg!check_backup_svn
+        }
+              
+# check_backup_vhosts
+define service{
+        use                     generic-service
+        host_name               yourhost
+        service_description     VHosts Backup
+        check_command           check_nrpe_1arg!check_backup_vhosts
+        }
+              
