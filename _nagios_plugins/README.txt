@@ -47,8 +47,7 @@ Add to Nagios Client
 edit /etc/nagios/nrpe_local.cfg
 
 command[check_backup_mysql]=/usr/local/linux-backup/_nagios_plugins/check_backup_mysql
-command[check_backup_redmine]=/usr/local/linux-backup/_nagios_plugins/check_backup_redmine
-command[check_backup_vhosts]=/usr/local/linux-backup/_nagios_plugins/check_backup_vhosts
+command[check_backup_asset]=/usr/local/linux-backup/_nagios_plugins/check_backup_asset
 command[check_backup_svn]=/usr/local/linux-backup/_nagios_plugins/check_backup_svn
 
 
@@ -70,14 +69,16 @@ define service{
         host_name               yourhost
         service_description     MySQL Backup
         check_command           check_nrpe_1arg!check_backup_mysql
+        normal_check_interval   720
         }
               
-# check_backup_redmine
+# check_backup_asset
 define service{
         use                     generic-service
         host_name               yourhost
-        service_description     Redmine Backup
-        check_command           check_nrpe_1arg!check_backup_redmine
+        service_description     Asset Backup
+        check_command           check_nrpe_1arg!check_backup_asset
+        normal_check_interval   720
         }
               
 # check_backup_svn
@@ -86,13 +87,6 @@ define service{
         host_name               yourhost
         service_description     SVN Backup
         check_command           check_nrpe_1arg!check_backup_svn
-        }
-              
-# check_backup_vhosts
-define service{
-        use                     generic-service
-        host_name               yourhost
-        service_description     VHosts Backup
-        check_command           check_nrpe_1arg!check_backup_vhosts
+        normal_check_interval   720
         }
               
