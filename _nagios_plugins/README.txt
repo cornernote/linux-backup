@@ -44,7 +44,7 @@ Test the Scripts
 Add to Nagios Client
 ----------------------------------
 
-edit /etc/nagios3/nrpe_local.cfg
+edit /etc/nagios/nrpe_local.cfg
 
 command[check_backup_mysql]=/usr/local/linux-backup/_nagios_plugins/check_backup_mysql
 command[check_backup_redmine]=/usr/local/linux-backup/_nagios_plugins/check_backup_redmine
