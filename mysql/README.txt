@@ -86,3 +86,8 @@ multi thread:
 ---
 echo *.sql.gz | xargs -n1 -P 16 -I % sh -c 'zcat % | mysql dbname'
 ---
+
+using myloader:
+---
+myloader -d /backup/mysql/daily/2009-04-08-00/ -B dbname
+---
