@@ -66,3 +66,16 @@ crontab -e
 30 1 * * 1 /usr/local/linux-backup/asset/weekly
 45 1 2 * * /usr/local/linux-backup/asset/monthly
 ---
+
+
+----------------------------------
+Restoring Data
+----------------------------------
+
+
+Example restore commands
+----------------------------------
+
+mkdir /backup/restore
+rdiff-backup --force --restore-as-of "2013-10-05T00:00:00" /backup/asset/daily/ /backup/restore/
+rsync -rav /backup/restore/ /home/you/asset/
