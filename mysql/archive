@@ -14,7 +14,7 @@
 
 SOURCE=h=localhost,D=newsmaker
 DEST=h=backup_host,D=backup_database,u=backup_user,p=backup_pass
-TABLES="audit audit_trail email_spool"
+TABLES="audit audit_trail email_spool log"
 WHERE="created < '`date +"%Y-%m-%d" --date="-14days"`'"
 LIMIT=100
 
