@@ -67,9 +67,12 @@ Setup Cron Tasks
 
 crontab -e
 ---
-0 1 * * * /usr/local/linux-backup/mysql/daily
-30 2 * * 1 /usr/local/linux-backup/mysql/weekly
-45 2 2 * * /usr/local/linux-backup/mysql/monthly
+LINUXBACKUP=/usr/local/linux-backup
+LOCKRUN=lockrun --idempotent --lockfile=/var/lockrun/
+0 1 * * * ${LINUXBACKUP}/mysql/daily
+0 2 * * * ${LOCKRUN}linux-backup-mysql-archive -- ${LINUXBACKUP}/mysql/archive
+30 2 * * 1 ${LINUXBACKUP}/mysql/weekly
+45 2 2 * * ${LINUXBACKUP}/mysql/monthly
 ---
 
 
