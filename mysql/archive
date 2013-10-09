@@ -1,0 +1,31 @@
+#!/bin/sh
+
+################################################################################
+# Linux Backup
+################################################################################
+# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Source Code: https://github.com/cornernote/linux-backup
+# License: GPLv3
+################################################################################
+
+#
+# MySQL Data Archiver
+#
+
+SOURCE=h=localhost,D=newsmaker
+DEST=h=backup_host,D=backup_database,u=backup_user,p=backup_pass
+TABLES="audit audit_trail email_spool"
+WHERE="created < '`date +"%Y-%m-%d" --date="-14days"`'"
+LIMIT=100
+
+for TABLE in ${TABLES}
+do
+	pt-archiver \
+		--source ${SOURCE},t=${TABLE} \
+		--dest ${DEST},t=${TABLE} \
+		--where "${WHERE}" \
+		--limit ${LIMIT} \
+		--commit-each \
+		--progress ${LIMIT} \
+		--no-check-charset
+done
