@@ -12,7 +12,7 @@
 # MySQL Data Archiver
 #
 
-SOURCE=h=localhost,D=newsmaker
+SOURCE=h=localhost,D=source_database
 DEST=h=backup_host,D=backup_database,u=backup_user,p=backup_pass
 TABLES="audit audit_trail email_spool log"
 WHERE="created < '`date +"%Y-%m-%d" --date="-14days"`'"
