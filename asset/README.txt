@@ -64,7 +64,7 @@ crontab -e
 ---
 0 0 * * * /usr/local/linux-backup/asset/daily
 30 1 * * 1 /usr/local/linux-backup/asset/weekly
-45 1 2 * * /usr/local/linux-backup/asset/monthly
+45 1 1 * * /usr/local/linux-backup/asset/monthly
 ---
 
 
