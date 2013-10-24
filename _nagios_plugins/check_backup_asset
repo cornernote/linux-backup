@@ -60,7 +60,7 @@ if (!$errors) {
 
 // some errors
 else {
-    echo 'CRITICAL: ' . "\n" . implode("\n", $errors) . "\n" . $message;
+    echo 'CRITICAL: ' . implode(', ', $errors) . ' - ' . $message;
     die(CRITICAL);
 }
 
