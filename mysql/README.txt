@@ -72,7 +72,7 @@ LOCKRUN=lockrun --idempotent --lockfile=/var/lockrun/
 0 1 * * * ${LINUXBACKUP}/mysql/daily
 0 2 * * * ${LOCKRUN}linux-backup-mysql-archive -- ${LINUXBACKUP}/mysql/archive
 30 2 * * 1 ${LINUXBACKUP}/mysql/weekly
-45 2 2 * * ${LINUXBACKUP}/mysql/monthly
+45 2 1 * * ${LINUXBACKUP}/mysql/monthly
 ---
 
 
