@@ -39,3 +39,13 @@ crontab -e
 0 4 * * * /usr/local/linux-backup/remote/remote
 ---
 
+
+----------------------------------
+Issues
+----------------------------------
+
+If you get `stdin: is not a tty` then you need to add the following to the beginig of `.bashrc` that is located in the home dir of the remote user.
+```
+[ -z "$PS1" ] && return
+```
+
