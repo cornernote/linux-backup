@@ -1,28 +1,20 @@
 #!/bin/sh
 
 ################################################################################
-# Linux Backup
+# MySQL Backup Daily
 ################################################################################
-# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Copyright (c) 2013 Mr PHP <info@mrphp.com.au>
 # Source Code: https://github.com/cornernote/linux-backup
-# License: GPLv3
+# License: BSD-3-Clause
 ################################################################################
 
-#
-# Monthly MySQL Backup
-#
-
-BACKUPDAILYDIR=/backup/mysql/daily/
-BACKUPDIR=/backup/mysql/monthly/
-BACKUPFOLDER=`date +"%Y-%m-%d"`
-BACKUPDAYS=365
-
-FIND=`which find`
-RSYNC=`which rsync`
-
-# copy daily backup
-${RSYNC} -a ${BACKUPDAILYDIR}${BACKUPFOLDER} ${BACKUPDIR}
+# latest daily backup
+${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPFOLDER} -c
 
 # delete old backups
 ${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -delete
 ${FIND} ${BACKUPDIR} -type d -empty -delete
+
+# upload to s3
+${S3CMD} sync -r --delete-removed --multipart-chunk-size-mb=50 ${BACKUPDIR}${BACKUPNAME}/ ${S3BUCKET}daily/
+

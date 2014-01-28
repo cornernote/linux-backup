@@ -1,16 +1,12 @@
 #!/bin/sh
 
 ################################################################################
-# Linux Backup
+# MySQL Backup Archive
 ################################################################################
-# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Copyright (c) 2013 Mr PHP <info@mrphp.com.au>
 # Source Code: https://github.com/cornernote/linux-backup
-# License: GPLv3
+# License: BSD-3-Clause
 ################################################################################
-
-#
-# MySQL Data Archiver
-#
 
 SOURCE=h=localhost,D=source_database
 DEST=h=backup_host,D=backup_database,u=backup_user,p=backup_pass

@@ -4,13 +4,13 @@
 ################################################################################
 # Linux Backup
 ################################################################################
-# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Copyright (c) 2013 Mr PHP <info@mrphp.com.au>
 # Source Code: https://github.com/cornernote/linux-backup
-# License: GPLv3
+# License: BSD-3-Clause
 ################################################################################
 
 #
-# Nagios Check Asset Backup
+# Nagios Check MySQL Backup
 #
 
 define('OK', 0);
@@ -19,24 +19,21 @@ define('CRITICAL', 2);
 define('UNKNOWN', 3);
 
 // get the path
-$path = '/backup/asset';
+$path = '/backup/mysql';
 
 // get the counts
 $count = array(
-    'daily' => count_files($path . '/daily'),
-    'weekly' => count_files($path . '/weekly'),
-    'monthly' => count_files($path . '/monthly'),
+    'daily' => count_files($path . '/daily/' . date('Y-m-d', strtotime('-1day'))),
+    'weekly' => count_files($path . '/weekly/' . date('Y-m-d', strtotime('last sunday'))),
+    'monthly' => count_files($path . '/monthly/' . date('Y-m-01', strtotime('-1day'))),
 );
 
 // do some checks
 $errors = array();
 
 // check daily
-ob_start();
-system('rdiff-backup -l ' . $path . '/daily');
-$system = ob_get_clean();
-if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
-    $errors[] = 'daily seems to be missing: ' . $system;
+if (!$count['daily']) {
+    $errors[] = 'daily has no files';
 }
 
 // check weekly

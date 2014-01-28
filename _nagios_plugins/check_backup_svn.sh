@@ -4,9 +4,9 @@
 ################################################################################
 # Linux Backup
 ################################################################################
-# Copyright (c) 2013 Brett O'Donnell <brett@mrphp.com.au>
+# Copyright (c) 2013 Mr PHP <info@mrphp.com.au>
 # Source Code: https://github.com/cornernote/linux-backup
-# License: GPLv3
+# License: BSD-3-Clause
 ################################################################################
 
 #
