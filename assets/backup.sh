@@ -32,7 +32,7 @@ ${RDIFFBACKUP} -v2 --force --remove-older-than ${BACKUPDAYS}D ${BACKUPDIR}
 # upload changed files to s3
 ${S3CMD} put -r --delete-removed --multipart-chunk-size-mb=50 ${BACKUPDIR} ${S3BUCKET}daily/
 
-# do a full remote backup on Sunday
+# check if we do a full remote backup today
 if [[ "date '+%a'" == ${FULLBACKUPDAY} ]]; then
 
 	# compress latest daily backup
