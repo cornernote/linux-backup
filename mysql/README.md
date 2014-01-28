@@ -32,9 +32,9 @@ chmod a+x /usr/local/linux-backup/mysql/daily.sh /usr/local/linux-backup/mysql/w
 ### Test the Scripts
 
 ```
-/usr/local/linux-backup/mysql/daily
-/usr/local/linux-backup/mysql/weekly
-/usr/local/linux-backup/mysql/archive
+/usr/local/linux-backup/mysql/daily.sh
+/usr/local/linux-backup/mysql/weekly.sh
+/usr/local/linux-backup/mysql/archive.sh
 ```
 
 

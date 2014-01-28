@@ -28,8 +28,8 @@ Change path in `/usr/local/linux-backup/asset/config.cfg`
 ### Test the Scripts
 
 ```
-/usr/local/linux-backup/asset/daily
-/usr/local/linux-backup/asset/weekly
+/usr/local/linux-backup/asset/daily.sh
+/usr/local/linux-backup/asset/weekly.sh
 ```
 
 
@@ -38,8 +38,8 @@ Change path in `/usr/local/linux-backup/asset/config.cfg`
 `crontab -e`
 
 ```
-0 0 * * * /usr/local/linux-backup/asset/daily
-30 1 * * 1 /usr/local/linux-backup/asset/weekly
+0 0 * * * /usr/local/linux-backup/asset/daily.sh
+30 1 * * 1 /usr/local/linux-backup/asset/weekly.sh
 ```
 
 
