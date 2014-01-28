@@ -11,7 +11,6 @@
 # config
 BACKUPDIR=/backup/mysql/
 BACKUPNAME=`date +"%Y-%m-%d"`
-BACKUPLAST=`date -d 'yesterday' +"%Y-%m-%d"`
 BACKUPDAYS=14
 S3BUCKET=s3://bucket-name/mysql/
 FULLBACKUPDAY=Sun
@@ -36,6 +35,6 @@ ${S3CMD} sync -r --delete-removed --multipart-chunk-size-mb=50 ${BACKUPDIR}${BAC
 if [[ "date '+%a'" == ${FULLBACKUPDAY} ]]; then
 
 	# upload full backup to s3
-	${S3CMD} put -r --multipart-chunk-size-mb=50 ${BACKUPDIR}${BACKUPLAST} ${S3BUCKET}weekly/
+	${S3CMD} put -r --multipart-chunk-size-mb=50 ${BACKUPDIR}${BACKUPNAME} ${S3BUCKET}weekly/
 
 fi
