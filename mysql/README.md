@@ -21,6 +21,8 @@ user="backup_user"
 pass="the_pass"
 ```
 
+`chmod 600 ~/.my.cnf`
+
 
 ### Allow Execution
 
