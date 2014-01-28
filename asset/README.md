@@ -46,12 +46,8 @@ Change path in `/usr/local/linux-backup/asset/config.cfg`
 ## Restoring Data
 
 
-### Example restore commands
-
 ```
-mkdir /backup/restore
 rdiff-backup --force --restore-as-of "2013-10-05T00:00:00" /backup/asset/ /backup/restore/
-rsync -rav /backup/restore/ /home/you/asset/
 ```
 
 
