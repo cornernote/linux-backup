@@ -25,16 +25,14 @@ pass="the_pass"
 ### Allow Execution
 
 ```
-chmod a+x /usr/local/linux-backup/mysql/daily.sh /usr/local/linux-backup/mysql/weekly.sh
+chmod a+x /usr/local/linux-backup/mysql/backup.sh
 ```
 
 
 ### Test the Scripts
 
 ```
-/usr/local/linux-backup/mysql/daily.sh
-/usr/local/linux-backup/mysql/weekly.sh
-/usr/local/linux-backup/mysql/archive.sh
+/usr/local/linux-backup/mysql/backup.sh
 ```
 
 
@@ -43,11 +41,7 @@ chmod a+x /usr/local/linux-backup/mysql/daily.sh /usr/local/linux-backup/mysql/w
 `crontab -e`
 
 ```
-LINUXBACKUP=/usr/local/linux-backup
-LOCKRUN=lockrun --idempotent --lockfile=/var/lockrun/
-0 1 * * * ${LINUXBACKUP}/mysql/daily
-0 2 * * * ${LOCKRUN}linux-backup-mysql-archive -- ${LINUXBACKUP}/mysql/archive
-30 2 * * 1 ${LINUXBACKUP}/mysql/weekly
+0 0 * * * /usr/local/linux-backup/mysql/backup.sh
 ```
 
 
@@ -69,6 +63,34 @@ using myloader:
 
 ```
 myloader -d /backup/mysql/YYYY-MM-DD/ -B dbname
+```
+
+
+## Nagios Checks
+
+
+### Client
+
+`vi /etc/nagios/nrpe_local.cfg`
+
+```
+command[check_backup_mysql]=/usr/local/linux-backup/mysql/check.php
+```
+
+
+### Server
+
+`vi /etc/nagios3/conf.d/yourhost.cfg`
+
+```
+# check_backup_mysql
+define service{
+        use                     generic-service
+        host_name               yourhost
+        service_description     MySQL Backup
+        check_command           check_nrpe_1arg!check_backup_mysql
+        normal_check_interval   720
+        }
 ```
 
 
