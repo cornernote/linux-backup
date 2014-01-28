@@ -2,7 +2,7 @@
 <?php
 
 ################################################################################
-# Check Backup SVN
+# SVN Backup Check
 ################################################################################
 # Copyright (c) 2013 Mr PHP <info@mrphp.com.au>
 # Source Code: https://github.com/cornernote/linux-backup
