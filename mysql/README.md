@@ -11,7 +11,7 @@ Backup your MySQL!
 mkdir -p /backup/mysql
 
 
-## Allow MySQL to Auto-Connect
+### Allow MySQL to Auto-Connect
 
 `vi ~/.my.cnf`
 
