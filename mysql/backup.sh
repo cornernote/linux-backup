@@ -29,12 +29,12 @@ ${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -delete
 ${FIND} ${BACKUPDIR} -type d -empty -delete
 
 # upload changed files to s3
-${S3CMD} sync -r --delete-removed --multipart-chunk-size-mb=50 ${BACKUPDIR}${BACKUPNAME}/ ${S3BUCKET}daily/
+${S3CMD} sync -r --delete-removed ${BACKUPDIR}${BACKUPNAME}/ ${S3BUCKET}daily/
 
 # check if we do a full remote backup today
 if [[ "date '+%a'" == ${FULLBACKUPDAY} ]]; then
 
 	# upload full backup to s3
-	${S3CMD} put -r --multipart-chunk-size-mb=50 ${BACKUPDIR}${BACKUPNAME} ${S3BUCKET}weekly/
+	${S3CMD} put -r ${BACKUPDIR}${BACKUPNAME} ${S3BUCKET}weekly/
 
 fi

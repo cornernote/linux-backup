@@ -28,4 +28,4 @@ do
 done
 
 # upload changed files to s3
-${S3CMD} sync -r --multipart-chunk-size-mb=50 ${BACKUPDIR} ${S3BUCKET}
+${S3CMD} sync -r ${BACKUPDIR} ${S3BUCKET}
