@@ -106,14 +106,18 @@ Sydney uses `s3-ap-southeast-2`, or check [other region endpoints](http://docs.a
 
 Configure s3cmd for the nagios user:
 
-Test nagios as follows:
-
 ```
 cp ~/.s3cfg /var/lib/nagios/
 chown nagios:nagios
 ```
 
-It is **highly** recommended to setup a read-only AWS IAM user instead of using your backup user.
+It is **highly** recommended to setup a read-only AWS IAM user and insert the credentials into `/var/lib/nagios/.s3cfg` instead of using your backup user.
+
+Test the commands by running as the nagios user:
+
+```
+sudo -u nagios /usr/local/linux-backup/assets/check.php
+```
 
 If you are still having trouble and need to debug the check.php script, you may find it useful to [see stderr from php](http://stackoverflow.com/questions/2320608/php-stderr-after-exec).
 
