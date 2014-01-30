@@ -41,7 +41,7 @@ if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
 // check file age in s3
 $s3DailyExists = false;
 ob_start();
-system($s3cmd . ' ls ' . $s3Bucket . 'daily/rdiff-backup/');
+system($s3cmd . ' ls ' . $s3Bucket . 'daily/rdiff-backup-data/');
 $s3List = trim(ob_get_clean());
 if (!$s3List) {
     $warnings[] = 's3 daily backup does not exist at ' . $s3Bucket . 'daily/rdiff-backup-data/';
