@@ -9,7 +9,7 @@
 	- [Configure s3cmd](#configure-s3cmd)
 	- [Create AWS IAM User](#create-aws-iam-user-1)
 	- [Extend Nagios Timeout](#extend-nagios-timeout)
-	- [Testing](#testing)
+	- [Testing Nagios Commands](#testing)
 - [Support](#support)
 - [License](#license)
 	 
@@ -167,12 +167,18 @@ Then replace `check_nrpe_1arg` with `check_nrpe_1arg_60sec` in your nagios check
 Visit [this article](http://deadlockprocess.wordpress.com/2010/07/11/how-to-fix-service-check-time-outs-in-nagios-nrpe-deployed-in-centosrhel-5/) or the [NRPE Documentation](http://nagios.sourceforge.net/docs/nrpe/NRPE.pdf) for more information on nagios timeouts.
 
 
-### Testing
+### Testing Nagios Commands
 
-Test the commands by running as the nagios user:
+Test the commands by running on the nagios client as the nagios user:
 
 ```
 sudo -u nagios /usr/local/linux-backup/assets/check.php
+```
+
+Test the commands from the nagios server:
+
+```
+/usr/lib/nagios/plugins/check_nrpe -H hostname -c check_backup_assets -t 60
 ```
 
 If you are still having trouble and need to debug the check.php script, you may find it useful to [see stderr from php](http://stackoverflow.com/questions/2320608/php-stderr-after-exec).
