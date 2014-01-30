@@ -3,39 +3,36 @@
 Backup your linux!
 
 
-## S3 Configuration
-
-
 ### Create AWS S3 Bucket
 
 Login to [AWS](https://console.aws.amazon.com)
 
-Click *Services*, then click *S3*.
+Click **Services**, then click **S3**.
 
-Click *Create Bucket*.
+Click **Create Bucket**.
 
-Enter a *Bucket Name* and choose the *Region*, then click *Create*.
+Enter a **Bucket Name** and choose the **Region**, then click **Create**.
 
 
 ### Create AWS IAM User
 
 Login to [AWS](https://console.aws.amazon.com)
 
-Click the *username dropdown* (top right), then click *Security Credentials*.
+Click the **username dropdown** (top right), then click **Security Credentials**.
 
-Click *Users* (left menu).
+Click **Users** (left menu).
 
-Click *Create New Users*.
+Click **Create New Users**.
 
-Enter a *Username* then click *Create*.
+Enter a **Username** then click **Create**.
 
 Save your access keys somewhere safe.
 
-Click the user, then click *Permissions* (tab in the bottom pane), then click *Attach User Policy*.
+Click the user, then click **Permissions** (tab in the bottom pane), then click **Attach User Policy**.
 
-Click *Custom Policy*, then click *Select*.
+Click **Custom Policy**, then click **Select**.
 
-Enter a *Policy Name* (can be the same as the username), then paste in the following into the *Policy Document* to give access to all s3 buckets.
+Enter a **Policy Name** (can be the same as the username), then paste in the following into the **Policy Document** to give access to all s3 buckets.
 
 ```
 {
@@ -53,9 +50,9 @@ Note: this gives full permissions to all S3 buckets, which is required when veri
 
 After s3cmd has been configured, you may want to change the permissions to restrict to a single bucket.
 
-Click the user, then click *Permissions* (tab in the bottom pane), then click *Manage Policy*.
+Click the user, then click **Permissions** (tab in the bottom pane), then click **Manage Policy**.
 
-Paste the following into the *Policy Document*, then click *Apply Policy*.
+Paste the following into the **Policy Document**, then click **Apply Policy**.
 
 ```
 {
