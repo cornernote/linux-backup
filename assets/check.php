@@ -14,24 +14,25 @@ define('WARNING', 1);
 define('CRITICAL', 2);
 define('UNKNOWN', 3);
 
-// get the path
-$path = '/backup/assets';
+// config
+$backupPath = '/backup/assets/';
+$s3Bucket = 's3://bucket-name/assets/';
 
 // do some checks
 $errors = $warnings = array();
 
 // check file count
-$count = count(glob($path . '/*'));
+$count = count(glob($backupPath . '*'));
 if (!$count) {
     $errors[] = 'backup has no files';
 }
 
 // check increments
 ob_start();
-system('rdiff-backup -l ' . $path);
+system('rdiff-backup -l ' . $backupPath);
 $system = ob_get_clean();
 if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
-    $errors[] = 'daily increment seems to be missing: ' . $system;
+    $errors[] = 'missing daily increment: ' . preg_replace('/\s+/', ' ', str_replace("\n", ' -- ', $system));
 }
 
 // some errors
