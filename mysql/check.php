@@ -20,8 +20,7 @@ $s3Bucket = 's3://bucket-name/mysql/';
 $weeklyBackupDay = 'sunday';
 
 // do some checks
-$errors = array();
-$warnings = array();
+$errors = $warnings = array();
 
 // check daily file count
 $count = count(glob($backupPath . '/' . date('Y-m-d') . '/*'));
