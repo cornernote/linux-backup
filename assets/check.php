@@ -58,12 +58,12 @@ else {
 }
 
 // check weekly files in s3
-$weeklyFile = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '.tgz';
+$s3WeeklyFile = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '.tgz';
 ob_start();
-system('s3cmd ls ' . $weeklyFile);
+system('s3cmd ls ' . $s3WeeklyFile);
 $s3Weekly = ob_get_clean();
 if (!$s3Weekly) {
-    $warnings[] = 's3 weekly backup does not exist at ' . $weeklyFile;
+    $warnings[] = 's3 weekly backup does not exist at ' . $s3WeeklyFile;
 }
 
 // some errors
