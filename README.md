@@ -111,12 +111,18 @@ Sydney uses `s3-ap-southeast-2`, or check [other region endpoints](http://docs.a
 
 ## Nagios Configutation
 
-Configure s3cmd for the nagios user:
+
+### Configure s3cmd
+
+The nagios user will not have access to your `~/.s3cmd`, so you will need to copy it to the nagios home folder.
 
 ```
 cp ~/.s3cfg /var/lib/nagios/
 chown nagios:nagios /var/lib/nagios/.s3cfg
 ```
+
+
+### Create AWS IAM User
 
 It is **highly** recommended to setup a read-only AWS IAM user and insert the credentials into `/var/lib/nagios/.s3cfg` instead of using your backup user.  Use the following AWS Policy Document to allow readonly access:
 
@@ -131,6 +137,29 @@ It is **highly** recommended to setup a read-only AWS IAM user and insert the cr
   ]
 }
 ```
+
+
+### Extend Nagios Timeout
+
+It is recommended to extend the NRPE timeout to avoid this error:
+
+```
+CHECK_NRPE: Socket timeout after 10 seconds.
+```
+
+Add to your nagios server `/etc/nagios3/commands.cfg`:
+
+```
+define command{
+        command_name    check_nrpe_1arg_60sec
+        command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -t 60
+        }
+```        
+
+Then replace `check_nrpe_1arg` with `check_nrpe_1arg_60sec` in your nagios checks.
+
+
+### Testing
 
 Test the commands by running as the nagios user:
 
