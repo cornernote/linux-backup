@@ -23,9 +23,10 @@ $weeklyBackupDay = 'sunday';
 $errors = $warnings = array();
 
 // check daily file count
-$count = count(glob($backupPath . date('Y-m-d', strtotime('yesterday')) . '/*'));
+$dailyPath = $backupPath . date('Y-m-d', strtotime('yesterday')) . '/';
+$count = count(glob($dailyPath . '*'));
 if (!$count) {
-    $errors[] = 'backup has no files';
+    $errors[] = 'backup has no files in ' . $dailyPath;
 }
 
 // check file count in s3
