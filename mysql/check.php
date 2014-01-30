@@ -38,7 +38,7 @@ f (count($s3List) != $count) {
 
 // check file age in s3
 foreach ($s3List as $s3File) {
-    $s3File = explode(' ', preg_replace('/\s+/', ' ',$s3File));
+    $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
     if (strtotime($s3File[0]) < strtotime('yesterday')) {
         $warnings[] = $s3File[3] . ' is too old (' . $s3File[0] . ')';
     }
