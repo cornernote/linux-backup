@@ -164,7 +164,7 @@ define command{
 
 Then replace `check_nrpe_1arg` with `check_nrpe_1arg_60sec` in your nagios checks.
 
-Visit this article for more information on [nagios timeouts](http://deadlockprocess.wordpress.com/2010/07/11/how-to-fix-service-check-time-outs-in-nagios-nrpe-deployed-in-centosrhel-5/).
+Visit [this article](http://deadlockprocess.wordpress.com/2010/07/11/how-to-fix-service-check-time-outs-in-nagios-nrpe-deployed-in-centosrhel-5/) or the [NRPE Documentation](http://nagios.sourceforge.net/docs/nrpe/NRPE.pdf) for more information on nagios timeouts.
 
 
 ### Testing
