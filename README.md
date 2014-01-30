@@ -6,6 +6,10 @@
 	- [Install s3cmd](#install-s3cmd)
 	- [Setup S3 Endpoints](#setup-s3-endpoints)
 - [Nagios Configutation](#nagios-configutation)
+	- [Configure s3cmd](#configure-s3cmd)
+	- [Create AWS IAM User](#create-aws-iam-user-1)
+	- [Extend Nagios Timeout](#extend-nagios-timeout)
+	- [Testing](#testing)
 - [Support](#support)
 - [License](#license)
 	 
@@ -157,6 +161,8 @@ define command{
 ```        
 
 Then replace `check_nrpe_1arg` with `check_nrpe_1arg_60sec` in your nagios checks.
+
+For more information on nagios timeouts [](http://deadlockprocess.wordpress.com/2010/07/11/how-to-fix-service-check-time-outs-in-nagios-nrpe-deployed-in-centosrhel-5/).
 
 
 ### Testing
