@@ -15,7 +15,7 @@ define('CRITICAL', 2);
 define('UNKNOWN', 3);
 
 // config
-$backupPath = '/backup/mysql';
+$backupPath = '/backup/mysql/';
 $s3Bucket = 's3://bucket-name/mysql/';
 $weeklyBackupDay = 'sunday';
 
@@ -23,7 +23,7 @@ $weeklyBackupDay = 'sunday';
 $errors = $warnings = array();
 
 // check daily file count
-$count = count(glob($backupPath . '/' . date('Y-m-d') . '/*'));
+$count = count(glob($backupPath . date('Y-m-d') . '/*'));
 if (!$count) {
     $errors[] = 'backup has no files';
 }
