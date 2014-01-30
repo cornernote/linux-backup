@@ -54,13 +54,24 @@ rdiff-backup --force --restore-as-of "2013-10-05T00:00:00" /backup/assets/ /back
 
 ### Client
 
-`vi /etc/nagios/nrpe_local.cfg`
+Add the command to `/etc/nagios/nrpe_local.cfg`:
 
 ```
 command[check_backup_asset]=/usr/local/linux-backup/assets/check.php
 ```
 
-`service nagios-nrpe-server restart`
+Then restart nagios:
+
+```
+service nagios-nrpe-server restart
+```
+
+Set permissions on the rdiff-backup-data folder so nagios can read the increments:
+
+```
+chmod 755 /backup/assets/rdiff-backup-data
+chmod 644 /backup/assets/rdiff-backup-data/chars_to_quote
+```
 
 
 ### Server
