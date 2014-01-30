@@ -22,7 +22,7 @@ FIND=`which find`
 S3CMD=`which s3cmd`
 
 # dump mysql databases
-${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPFOLDER} -c
+${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPNAME} -c
 
 # delete old backups
 ${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -delete
