@@ -23,7 +23,7 @@ $weeklyBackupDay = 'sunday';
 $errors = $warnings = array();
 
 // check daily file count
-$count = count(glob($backupPath . date('Y-m-d') . '/*'));
+$count = count(glob($backupPath . date('Y-m-d', strtotime('yesterday')) . '/*'));
 if (!$count) {
     $errors[] = 'backup has no files';
 }
