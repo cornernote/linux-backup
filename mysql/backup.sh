@@ -20,8 +20,10 @@ MYSQLDUMP=`which mysqldump`
 MYDUMPER=`which mydumper`
 FIND=`which find`
 S3CMD=`which s3cmd`
+MKDIR=`which mkdir`
 
 # dump mysql databases
+${MKDIR} ${BACKUPDIR}${BACKUPNAME}
 ${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPNAME} -c
 
 # delete old backups
