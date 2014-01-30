@@ -60,13 +60,15 @@ rdiff-backup --force --restore-as-of "2013-10-05T00:00:00" /backup/assets/ /back
 command[check_backup_asset]=/usr/local/linux-backup/assets/check.php
 ```
 
+`service nagios-nrpe-server restart`
+
 
 ### Server
 
 `vi /etc/nagios3/conf.d/yourhost.cfg`
 
 ```
-# check_backup_mysql
+# check_backup_assets
 define service{
         use                     generic-service
         host_name               yourhost
@@ -85,4 +87,4 @@ define service{
 
 ## License
 
-[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright © 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
+[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright ï¿½ 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
