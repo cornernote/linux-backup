@@ -45,11 +45,12 @@ foreach ($s3List as $s3File) {
 }
 
 // check weekly files in s3
+$weeklyPath = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '/';
 ob_start();
-system('s3cmd ls ' . $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '/ | wc -l');
+system('s3cmd ls ' . $weeklyPath . ' | wc -l');
 $s3CountWeekly = ob_get_clean();
 if (!$s3CountWeekly) {
-    $warnings[] = 's3 weekly backup has no files';
+    $warnings[] = 's3 weekly backup has no files in ' . $weeklyPath;
 }
 
 // some errors
