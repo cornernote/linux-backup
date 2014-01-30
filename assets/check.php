@@ -18,6 +18,7 @@ define('UNKNOWN', 3);
 $backupPath = '/backup/assets/';
 $s3Bucket = 's3://bucket-name/assets/';
 $weeklyBackupDay = 'sunday';
+$s3cmd = '/usr/local/bin/s3cmd -c /var/lib/nagios/.s3cfg';
 
 // do some checks
 $errors = $warnings = array();
@@ -39,7 +40,7 @@ if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
 // check file age in s3
 $s3DailyExists = false;
 ob_start();
-system('s3cmd ls ' . $s3Bucket . 'daily/rdiff-backup/');
+system($s3cmd . ' ls ' . $s3Bucket . 'daily/rdiff-backup/');
 $s3List = trim(ob_get_clean());
 if (!$s3List) {
     $warnings[] = 's3 daily backup does not exist at ' . $s3Bucket . 'daily/rdiff-backup/';
@@ -60,7 +61,7 @@ else {
 // check weekly files in s3
 $s3WeeklyFile = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '.tgz';
 ob_start();
-system('s3cmd ls ' . $s3WeeklyFile);
+system($s3cmd . ' ls ' . $s3WeeklyFile);
 $s3Weekly = ob_get_clean();
 if (!$s3Weekly) {
     $warnings[] = 's3 weekly backup does not exist at ' . $s3WeeklyFile;
