@@ -17,6 +17,7 @@ define('UNKNOWN', 3);
 // config
 $backupPath = '/backup/assets/';
 $s3Bucket = 's3://bucket-name/assets/';
+$weeklyBackupDay = 'sunday';
 
 // do some checks
 $errors = $warnings = array();
@@ -27,12 +28,42 @@ if (!$count) {
     $errors[] = 'backup has no files';
 }
 
-// check increments
+// check daily increment
 ob_start();
 system('rdiff-backup -l ' . $backupPath);
 $system = ob_get_clean();
 if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
     $errors[] = 'missing daily increment: ' . preg_replace('/\s+/', ' ', str_replace("\n", ' -- ', $system));
+}
+
+// check file age in s3
+$s3DailyExists = false;
+ob_start();
+system('s3cmd ls ' . $s3Bucket . 'daily/rdiff-backup/');
+$s3List = trim(ob_get_clean());
+if (!$s3List) {
+    $warnings[] = 's3 daily backup does not exist at ' . $s3Bucket . 'daily/rdiff-backup/';
+}
+else {
+    foreach (explode("\n", $s3List) as $s3File) {
+        $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
+        if (strtotime($s3File[0]) < strtotime('yesterday')) {
+            $s3DailyExists = true;
+            break;
+        }
+    }
+    if (!$s3DailyExists) {
+        $warnings[] = 's3 daily is too old - ' . preg_replace('/\s+/', ' ', str_replace("\n", ' -- ', $s3List));
+    }
+}
+
+// check weekly files in s3
+$weeklyFile = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '.tgz';
+ob_start();
+system('s3cmd ls ' . $weeklyFile);
+$s3Weekly = ob_get_clean();
+if (!$s3Weekly) {
+    $warnings[] = 's3 weekly backup does not exist at ' . $weeklyFile;
 }
 
 // some errors
