@@ -102,6 +102,22 @@ host_bucket = %(bucket)s.s3-ap-southeast-2.amazonaws.com
 Sydney uses `s3-ap-southeast-2`, or check [other region endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html).
 
 
+## Nagios Configutation
+
+Configure s3cmd for the nagios user:
+
+Test nagios as follows:
+
+```
+cp ~/.s3cfg /var/lib/nagios/
+chown nagios:nagios
+```
+
+It is **highly** recommended to setup a read-only AWS IAM user instead of using your backup user.
+
+If you are still having trouble and need to debug the check.php script, you may find it useful to [see stderr from php](http://stackoverflow.com/questions/2320608/php-stderr-after-exec).
+
+
 ## Support
 
 - Does this README need improvement?  Go ahead and [suggest a change](https://github.com/cornernote/linux-backup/edit/master/README.md).
