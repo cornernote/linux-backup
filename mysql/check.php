@@ -9,18 +9,19 @@
 # License: BSD-3-Clause
 ################################################################################
 
-define('OK', 0);
-define('WARNING', 1);
-define('CRITICAL', 2);
-define('UNKNOWN', 3);
-
 // config
 $backupPath = '/backup/mysql/';
 $s3Bucket = 's3://bucket-name/mysql/';
 $weeklyBackupDay = 'sunday';
 $s3cmd = '/usr/local/bin/s3cmd -c /var/lib/nagios/.s3cfg';
 
-// do some checks
+// defines
+define('OK', 0);
+define('WARNING', 1);
+define('CRITICAL', 2);
+define('UNKNOWN', 3);
+
+// checks
 $errors = $warnings = array();
 
 // check daily file count
