@@ -106,4 +106,4 @@ define service{
 
 ## License
 
-[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright � 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
+[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright © 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
