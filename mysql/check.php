@@ -14,8 +14,9 @@ define('WARNING', 1);
 define('CRITICAL', 2);
 define('UNKNOWN', 3);
 
-// get the path
+// config
 $path = '/backup/mysql';
+$s3Bucket = 's3://bucket-name/mysql/';
 
 // do some checks
 $errors = array();
@@ -29,7 +30,7 @@ if (!$count) {
 
 // check file count in s3
 ob_start();
-system('s3cmd ls s3://factoryfast-backup/mysql/daily/');
+system('s3cmd ls ' . $s3Bucket . 'daily/');
 $s3List = explode("\n", trim(ob_get_clean()));
 f (count($s3List) != $count) {
     $warnings[] = 's3 daily count does not match local count';
@@ -45,7 +46,7 @@ foreach ($s3List as $s3File) {
 
 // check weekly files in s3
 ob_start();
-system('s3cmd ls s3://factoryfast-backup/mysql/weekly/' . date('Y-m-d', strtotime('last sunday')) . '/ | wc -l');
+system('s3cmd ls ' . $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last sunday')) . '/ | wc -l');
 $s3CountWeekly = ob_get_clean();
 if (!$s3CountWeekly) {
     $warnings[] = 's3 weekly backup has no files';
