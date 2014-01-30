@@ -108,7 +108,7 @@ Configure s3cmd for the nagios user:
 
 ```
 cp ~/.s3cfg /var/lib/nagios/
-chown nagios:nagios
+chown nagios:nagios /var/lib/nagios/.s3cfg
 ```
 
 It is **highly** recommended to setup a read-only AWS IAM user and insert the credentials into `/var/lib/nagios/.s3cfg` instead of using your backup user.  Use the following AWS Policy Document to allow readonly access:
