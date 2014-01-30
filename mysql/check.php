@@ -27,20 +27,20 @@ if (!$count) {
     $errors[] = 'backup has no files';
 }
 
-// check file age in s3
+// check file count in s3
 ob_start();
 system('s3cmd ls s3://factoryfast-backup/mysql/daily/');
 $s3List = explode("\n", trim(ob_get_clean()));
+f (count($s3List) != $count) {
+    $warnings[] = 's3 daily count does not match local count';
+}
+
+// check file age in s3
 foreach ($s3List as $s3File) {
     $s3File = explode(' ', preg_replace('/\s+/', ' ',$s3File));
     if (strtotime($s3File[0]) < strtotime('yesterday')) {
         $warnings[] = $s3File[3] . ' is too old (' . $s3File[0] . ')';
     }
-}
-
-// check file count in s3
-if (count($s3List) != $count) {
-    $warnings[] = 's3 daily count does not match local count';
 }
 
 // check weekly files in s3
