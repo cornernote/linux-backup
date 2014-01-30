@@ -80,15 +80,17 @@ Paste the following into the **Policy Document**, then click **Apply Policy**.
 Download and configure s3cmd:
 
 ```
-wget http://sourceforge.net/projects/s3tools/files/s3cmd/1.1.0-beta2/s3cmd-1.1.0-beta2.tar.gz/download -O s3cmd-1.1.0-beta2.tar.gz
-tar xvfz s3cmd-1.1.0-beta2.tar.gz
-cd s3cmd-1.1.0-beta2/
+wget https://github.com/s3tools/s3cmd/archive/v1.1.0-beta3.tar.gz -O s3cmd-1.1.0-beta3.tar.gz
+tar xvfz s3cmd-1.1.0-beta3.tar.gz
+cd s3cmd-1.1.0-beta3/
 python setup.py install
 s3cmd --configure
 ```
 
 
 ### Setup S3 Endpoints
+
+This step is optional, however it may reduce initial connection time.
 
 `vi ~/.s3cfg`
 
