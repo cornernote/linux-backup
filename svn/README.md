@@ -14,15 +14,14 @@ mkdir -p /backup/svn
 ### Allow Execution
 
 ```
-chmod a+x /usr/local/linux-backup/svn/daily.sh /usr/local/linux-backup/svn/weekly.sh
+chmod a+x /usr/local/linux-backup/svn/backup.sh
 ```
 
 
 ### Test the Scripts
 
 ```
-/usr/local/linux-backup/svn/daily.sh
-/usr/local/linux-backup/svn/weekly.sh
+/usr/local/linux-backup/svn/backup.sh
 ```
 
 
@@ -31,8 +30,7 @@ chmod a+x /usr/local/linux-backup/svn/daily.sh /usr/local/linux-backup/svn/weekl
 `crontab -e`
 
 ```
-0 2 * * * /usr/local/linux-backup/svn/daily
-30 3 * * 1 /usr/local/linux-backup/svn/weekly
+0 2 * * * /usr/local/linux-backup/svn/backup.sh
 ```
 
 
@@ -72,4 +70,4 @@ define service{
 
 ## License
 
-[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright © 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
+[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright ï¿½ 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
