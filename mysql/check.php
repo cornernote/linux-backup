@@ -18,6 +18,7 @@ define('UNKNOWN', 3);
 $backupPath = '/backup/mysql/';
 $s3Bucket = 's3://bucket-name/mysql/';
 $weeklyBackupDay = 'sunday';
+$s3cmd = '/usr/local/bin/s3cmd -c /var/lib/nagios/.s3cfg';
 
 // do some checks
 $errors = $warnings = array();
@@ -31,7 +32,7 @@ if (!$count) {
 
 // check file count in s3
 ob_start();
-system('s3cmd ls ' . $s3Bucket . 'daily/');
+system($s3cmd . ' ls ' . $s3Bucket . 'daily/');
 $s3List = explode("\n", trim(ob_get_clean()));
 f (count($s3List) != $count) {
     $warnings[] = 's3 daily count does not match local count';
@@ -48,7 +49,7 @@ foreach ($s3List as $s3File) {
 // check weekly files in s3
 $weeklyPath = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '/';
 ob_start();
-system('s3cmd ls ' . $weeklyPath . ' | wc -l');
+system($s3cmd . ' ls ' . $weeklyPath . ' | wc -l');
 $s3CountWeekly = ob_get_clean();
 if (!$s3CountWeekly) {
     $warnings[] = 's3 weekly backup has no files in ' . $weeklyPath;
