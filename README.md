@@ -111,7 +111,19 @@ cp ~/.s3cfg /var/lib/nagios/
 chown nagios:nagios
 ```
 
-It is **highly** recommended to setup a read-only AWS IAM user and insert the credentials into `/var/lib/nagios/.s3cfg` instead of using your backup user.
+It is **highly** recommended to setup a read-only AWS IAM user and insert the credentials into `/var/lib/nagios/.s3cfg` instead of using your backup user.  Use the following AWS Policy Document to allow readonly access:
+
+```
+{
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:Get*","s3:List*"],
+      "Resource": "arn:aws:s3:::factoryfast-backup"
+    }
+  ]
+}
+```
 
 Test the commands by running as the nagios user:
 
