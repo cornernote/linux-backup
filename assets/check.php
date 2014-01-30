@@ -44,7 +44,7 @@ ob_start();
 system($s3cmd . ' ls ' . $s3Bucket . 'daily/rdiff-backup/');
 $s3List = trim(ob_get_clean());
 if (!$s3List) {
-    $warnings[] = 's3 daily backup does not exist at ' . $s3Bucket . 'daily/rdiff-backup/';
+    $warnings[] = 's3 daily backup does not exist at ' . $s3Bucket . 'daily/rdiff-backup-data/';
 }
 else {
     foreach (explode("\n", $s3List) as $s3File) {
