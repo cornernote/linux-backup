@@ -32,7 +32,7 @@ ${FIND} ${BACKUPDIR} -type d -empty -delete
 ${S3CMD} sync -r --delete-removed ${BACKUPDIR}${BACKUPNAME}/ ${S3BUCKET}daily/
 
 # check if we do a full remote backup today
-if [[ "date '+%a'" == ${FULLBACKUPDAY} ]]; then
+if [[ `date '+%a'` == ${FULLBACKUPDAY} ]]; then
 
 	# upload full backup to s3
 	${S3CMD} put -r ${BACKUPDIR}${BACKUPNAME} ${S3BUCKET}weekly/
