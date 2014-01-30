@@ -18,7 +18,7 @@ define('UNKNOWN', 3);
 $path = '/backup/assets';
 
 // do some checks
-$errors = array();
+$errors = $warnings = array();
 
 // check file count
 $count = count(glob($path . '/*'));
@@ -34,15 +34,18 @@ if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
     $errors[] = 'daily increment seems to be missing: ' . $system;
 }
 
-// compile a message
-$message = "files:{$count}";
-
 // some errors
 if ($errors) {
-    echo 'CRITICAL: ' . implode(', ', $errors) . ' - ' . $message;
+    echo 'CRITICAL: ' . implode(', ', $errors);
     die(CRITICAL);
 }
 
+// some warnings
+if ($warnings) {
+    echo 'WARNING: ' . implode(', ', $warnings);
+    die(WARNING);
+}
+
 // checks pass, sweet!
-echo 'OK: ' . $message;
+echo 'OK: files:' . $count;
 die(OK);
