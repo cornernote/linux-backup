@@ -15,15 +15,16 @@ define('CRITICAL', 2);
 define('UNKNOWN', 3);
 
 // config
-$path = '/backup/mysql';
+$backupPath = '/backup/mysql';
 $s3Bucket = 's3://bucket-name/mysql/';
+$weeklyBackupDay = 'sunday';
 
 // do some checks
 $errors = array();
 $warnings = array();
 
 // check daily file count
-$count = count(glob($path . '/' . date('Y-m-d') . '/*'));
+$count = count(glob($backupPath . '/' . date('Y-m-d') . '/*'));
 if (!$count) {
     $errors[] = 'backup has no files';
 }
@@ -46,7 +47,7 @@ foreach ($s3List as $s3File) {
 
 // check weekly files in s3
 ob_start();
-system('s3cmd ls ' . $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last sunday')) . '/ | wc -l');
+system('s3cmd ls ' . $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '/ | wc -l');
 $s3CountWeekly = ob_get_clean();
 if (!$s3CountWeekly) {
     $warnings[] = 's3 weekly backup has no files';
