@@ -85,6 +85,8 @@ Paste the following into the **Policy Document**, then click **Apply Policy**.
 }
 ```
 
+Thanks to [samwize](http://samwize.com) for his [blog post](http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/) and [stackoverflow answer](http://stackoverflow.com/a/16128347/599477) explaining how to set the correct policy.
+
 
 ### Install s3cmd
 
