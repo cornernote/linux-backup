@@ -79,6 +79,8 @@ myloader -d /backup/mysql/YYYY-MM-DD/ -B dbname
 command[check_backup_mysql]=/usr/local/linux-backup/mysql/check.php
 ```
 
+`service nagios-nrpe-server restart`
+
 
 ### Server
 
@@ -104,4 +106,4 @@ define service{
 
 ## License
 
-[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright © 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
+[BSD-3-Clause](https://raw.github.com/cornernote/linux-backup/master/LICENSE), Copyright ï¿½ 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
