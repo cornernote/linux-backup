@@ -25,7 +25,7 @@ define('UNKNOWN', 3);
 $errors = $warnings = array();
 
 // check daily file count
-$dailyPath = $backupPath . date('Y-m-d', strtotime('yesterday')) . '/';
+$dailyPath = $backupPath . date('Y-m-d') . '/';
 $count = count(glob($dailyPath . '*'));
 if (!$count) {
     $errors[] = 'backup has no files in ' . $dailyPath;
