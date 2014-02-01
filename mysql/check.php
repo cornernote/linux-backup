@@ -49,7 +49,7 @@ foreach ($s3List as $s3File) {
         $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[2] . ')';
     }
     // compare md5
-    elseif (md5_file($localFilename) != $s3File[3]) {
+    if (md5_file($localFilename) != $s3File[3]) {
         $warnings[] = $s3File[4] . ' hash does not match s3 (' . $s3File[3] . ')';
     }
 }
