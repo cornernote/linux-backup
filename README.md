@@ -11,7 +11,6 @@
 	- [Extend Nagios Timeout](#extend-nagios-timeout)
 	- [Testing Nagios Commands](#testing)
 - [Support](#support)
-- [Troubleshooting](#troubleshooting)
 - [License](#license)
 	 
 	
