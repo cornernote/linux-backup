@@ -33,17 +33,24 @@ if (!$count) {
 
 // check file count in s3
 ob_start();
-system($s3cmd . ' ls ' . $s3Bucket . 'daily/');
+$s3BucketDaily = $s3Bucket . 'daily/';
+system($s3cmd . ' ls --list-md5 ' . $s3BucketDaily);
 $s3List = explode("\n", trim(ob_get_clean()));
-f (count($s3List) != $count) {
+if (count($s3List) != $count) {
     $warnings[] = 's3 daily count does not match local count';
 }
 
-// check file age in s3
+// compare local file to s3
 foreach ($s3List as $s3File) {
     $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
-    if (strtotime($s3File[0]) < strtotime('yesterday')) {
-        $warnings[] = $s3File[3] . ' is too old (' . $s3File[0] . ')';
+    $localFilename = $dailyPath . substr($s3File[4], strlen($s3BucketDaily));
+    // compare filesize
+    if (filesize($localFilename) != $s3File[2]) {
+        $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[3] . ')';
+    }
+    // compare md5
+    elseif (md5_file($localFilename) != $s3File[3]) {
+        $warnings[] = $s3File[4] . ' hash does not match s3 (' . $s3File[3] . ')';
     }
 }
 
