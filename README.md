@@ -11,6 +11,7 @@
 	- [Extend Nagios Timeout](#extend-nagios-timeout)
 	- [Testing Nagios Commands](#testing)
 - [Support](#support)
+- [Troubleshooting](#troubleshooting)
 - [License](#license)
 	 
 	
@@ -193,6 +194,13 @@ If you are still having trouble and need to debug the check.php script, you may 
 
 - Does this README need improvement?  Go ahead and [suggest a change](https://github.com/cornernote/linux-backup/edit/master/README.md).
 - Found a bug, or need help using this project?  Check the [open issues](https://github.com/cornernote/linux-backup/issues) or [create an issue](https://github.com/cornernote/linux-backup/issues/new).
+
+
+## Troubleshooting
+
+If you are stuck, as I was many times, you can try this useful technique to assist in getting your brain juices flowing.
+
+![Troubleshooting](http://ecx.images-amazon.com/images/I/51RZPVEYPWL.jpg "Troubleshooting")
 
 
 ## License
