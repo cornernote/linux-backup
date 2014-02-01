@@ -138,7 +138,12 @@ It is **highly** recommended to setup a read-only AWS IAM user and insert the cr
     {
       "Effect": "Allow",
       "Action": ["s3:Get*","s3:List*"],
-      "Resource": "arn:aws:s3:::factoryfast-backup"
+      "Resource": "arn:aws:s3:::bucket-name"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:Get*","s3:List*"],
+      "Resource": "arn:aws:s3:::bucket-name/*"
     }
   ]
 }
