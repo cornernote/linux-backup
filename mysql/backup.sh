@@ -30,7 +30,8 @@ ${MYDUMPER} -t 4 -o ${BACKUPDIR}${BACKUPNAME} -c
 ${FIND} ${BACKUPDIR} -mtime +${BACKUPDAYS} -delete
 ${FIND} ${BACKUPDIR} -type d -empty -delete
 
-# upload changed files to s3
+# s3 upload changed files, then remove locally deleted files
+${S3CMD} put -r ${BACKUPDIR}${BACKUPNAME}/ ${S3BUCKET}daily/
 ${S3CMD} sync -r --delete-removed ${BACKUPDIR}${BACKUPNAME}/ ${S3BUCKET}daily/
 
 # check if we do a full remote backup today
