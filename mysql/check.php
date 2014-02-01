@@ -46,7 +46,7 @@ foreach ($s3List as $s3File) {
     $localFilename = $dailyPath . substr($s3File[4], strlen($s3BucketDaily));
     // compare filesize
     if (filesize($localFilename) != $s3File[2]) {
-        $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[3] . ')';
+        $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[2] . ')';
     }
     // compare md5
     elseif (md5_file($localFilename) != $s3File[3]) {
