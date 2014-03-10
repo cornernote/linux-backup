@@ -14,6 +14,7 @@ $backupPath = '/backup/assets/';
 $s3Bucket = 's3://bucket-name/assets/';
 $weeklyBackupDay = 'sunday';
 $s3cmd = '/usr/local/bin/s3cmd -c /var/lib/nagios/.s3cfg';
+$dailyBackupFile = '/backup/assets.tgz';
 
 // defines
 define('OK', 0);
@@ -38,24 +39,25 @@ if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
     $errors[] = 'missing daily increment: ' . preg_replace('/\s+/', ' ', str_replace("\n", ' -- ', $system));
 }
 
-// check file age in s3
-$s3DailyExists = false;
+// check daily file in s3
+$s3File = $s3Bucket . basename($dailyBackupFile);
 ob_start();
-system($s3cmd . ' ls ' . $s3Bucket . 'daily/rdiff-backup-data/');
-$s3List = trim(ob_get_clean());
+system($s3cmd . ' ls --list-md5 ' . $s3File);
+$s3List = explode("\n", trim(ob_get_clean()));
 if (!$s3List) {
-    $warnings[] = 's3 daily backup does not exist at ' . $s3Bucket . 'daily/rdiff-backup-data/';
+    $warnings[] = 's3 daily file foes not exist';
 }
 else {
-    foreach (explode("\n", $s3List) as $s3File) {
-        $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
-        if (strtotime($s3File[0]) < strtotime('yesterday')) {
-            $s3DailyExists = true;
-            break;
-        }
+    // compare local file to s3
+    $s3File = $s3List[0];
+    $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
+    // compare filesize
+    if (filesize($dailyBackupFile) != $s3File[2]) {
+        $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[2] . ')';
     }
-    if (!$s3DailyExists) {
-        $warnings[] = 's3 daily is too old - ' . preg_replace('/\s+/', ' ', str_replace("\n", ' -- ', $s3List));
+    // compare md5
+    if (md5_file($dailyBackupFile) != $s3File[3]) {
+        $warnings[] = $s3File[4] . ' hash does not match s3 (' . $s3File[3] . ')';
     }
 }
 
