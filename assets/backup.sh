@@ -12,7 +12,7 @@
 SOURCE=/home/you/assets/
 BACKUPDIR=/backup/assets/
 BACKUPDAYS=14
-BACKUPNAME=/backup/`date +"%Y-%m-%d"`.tgz
+BACKUPNAME=/backup/assets-`date +"%Y-%m-%d"`.tgz
 S3BUCKET=s3://bucket-name/assets/
 FULLBACKUPDAY=Sun
 DAILYNAME=/backup/assets.tgz
