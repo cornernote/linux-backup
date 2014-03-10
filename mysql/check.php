@@ -39,18 +39,19 @@ $s3List = explode("\n", trim(ob_get_clean()));
 if (count($s3List) != $count) {
     $warnings[] = 's3 daily count does not match local count';
 }
-
-// compare local file to s3
-foreach ($s3List as $s3File) {
-    $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
-    $localFilename = $dailyPath . substr($s3File[4], strlen($s3BucketDaily));
-    // compare filesize
-    if (filesize($localFilename) != $s3File[2]) {
-        $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[2] . ')';
-    }
-    // compare md5
-    if (md5_file($localFilename) != $s3File[3]) {
-        $warnings[] = $s3File[4] . ' hash does not match s3 (' . $s3File[3] . ')';
+else {
+    // compare local file to s3
+    foreach ($s3List as $s3File) {
+        $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
+        $localFilename = $dailyPath . substr($s3File[4], strlen($s3BucketDaily));
+        // compare filesize
+        if (filesize($localFilename) != $s3File[2]) {
+            $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[2] . ')';
+        }
+        // compare md5
+        if (md5_file($localFilename) != $s3File[3]) {
+            $warnings[] = $s3File[4] . ' hash does not match s3 (' . $s3File[3] . ')';
+        }
     }
 }
 
