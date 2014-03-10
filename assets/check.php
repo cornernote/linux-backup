@@ -15,6 +15,7 @@ $s3Bucket = 's3://bucket-name/assets/';
 $weeklyBackupDay = 'sunday';
 $s3cmd = '/usr/local/bin/s3cmd -c /var/lib/nagios/.s3cfg';
 $dailyBackupFile = '/backup/assets.tgz';
+$weeklyPrefix = 'assets-';
 
 // defines
 define('OK', 0);
@@ -62,7 +63,7 @@ else {
 }
 
 // check weekly files in s3
-$s3WeeklyFile = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '.tgz';
+$s3WeeklyFile = $s3Bucket . 'weekly/' . $weeklyPrefix . date('Y-m-d', strtotime('last ' . $weeklyBackupDay)) . '.tgz';
 ob_start();
 system($s3cmd . ' ls ' . $s3WeeklyFile);
 $s3Weekly = trim(ob_get_clean());
