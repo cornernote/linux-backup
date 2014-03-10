@@ -35,7 +35,7 @@ if (!$count) {
 ob_start();
 system('rdiff-backup -l ' . $backupPath);
 $system = ob_get_clean();
-if (!strpos($system, date('Y-m-d', strtotime('-1 day')))) {
+if (!strpos($system, date('Y-m-d'))) {
     $errors[] = 'missing daily increment: ' . preg_replace('/\s+/', ' ', str_replace("\n", ' -- ', $system));
 }
 
