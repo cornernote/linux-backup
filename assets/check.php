@@ -53,7 +53,7 @@ else {
     $s3File = explode(' ', preg_replace('/\s+/', ' ', $s3File));
     // compare filesize
     if (filesize($dailyBackupFile) != $s3File[2]) {
-        $warnings[] = $s3File[4] . ' filezise does not match s3 (' . $s3File[2] . ')';
+        $warnings[] = $s3File[4] . ' filesize does not match s3 (' . $s3File[2] . ')';
     }
     // compare md5
     if (md5_file($dailyBackupFile) != $s3File[3]) {
