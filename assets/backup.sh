@@ -15,6 +15,7 @@ BACKUPDAYS=14
 BACKUPNAME=/backup/`date +"%Y-%m-%d"`.tgz
 S3BUCKET=s3://bucket-name/assets/
 FULLBACKUPDAY=Sun
+DAILYNAME=/backup/assets.tgz
 
 # binary paths
 TAR=`which tar`
@@ -30,13 +31,13 @@ ${RDIFFBACKUP} ${SOURCE} ${BACKUPDIR}
 ${RDIFFBACKUP} -v2 --force --remove-older-than ${BACKUPDAYS}D ${BACKUPDIR}
 
 # delete compressed backup
-${RM} -f /backup/daily.tgz
+${RM} -f ${DAILYNAME}
 
 # compress latest daily backup
-${TAR} cfzP /backup/daily.tgz ${BACKUPDIR}
+${TAR} cfzP ${DAILYNAME} ${BACKUPDIR}
 
 # upload changed files to s3
-${S3CMD} put /backup/daily.tgz ${S3BUCKET}
+${S3CMD} put ${DAILYNAME} ${S3BUCKET}
 
 # upload changed files to s3
 #${S3CMD} sync -r --delete-removed ${BACKUPDIR} ${S3BUCKET}daily/
