@@ -29,8 +29,17 @@ ${RDIFFBACKUP} ${SOURCE} ${BACKUPDIR}
 # remove old increments
 ${RDIFFBACKUP} -v2 --force --remove-older-than ${BACKUPDAYS}D ${BACKUPDIR}
 
+# delete compressed backup
+${RM} -f /backup/daily.tgz
+
+# compress latest daily backup
+${TAR} cfzP /backup/daily.tgz ${BACKUPDIR}
+
 # upload changed files to s3
-${S3CMD} sync -r --delete-removed ${BACKUPDIR} ${S3BUCKET}daily/
+${S3CMD} put /backup/daily.tgz ${S3BUCKET}
+
+# upload changed files to s3
+#${S3CMD} sync -r --delete-removed ${BACKUPDIR} ${S3BUCKET}daily/
 
 # check if we do a full remote backup today
 if [[ `date '+%a'` == ${FULLBACKUPDAY} ]]; then
