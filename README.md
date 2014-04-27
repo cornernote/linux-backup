@@ -100,6 +100,12 @@ python setup.py install
 s3cmd --configure
 ```
 
+Symlink s3cmd to prevent issues when running from cron
+
+```
+ln -s /usr/local/bin/s3cmd /usr/bin/s3cmd
+```
+
 
 ### Setup S3 Endpoints
 
