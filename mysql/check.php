@@ -60,7 +60,7 @@ $weeklyPath = $s3Bucket . 'weekly/' . date('Y-m-d', strtotime('last ' . $weeklyB
 ob_start();
 system($s3cmd . ' ls ' . $weeklyPath . ' | wc -l');
 $s3CountWeekly = ob_get_clean();
-if (count($s3CountWeekly) < 10) {
+if ($s3CountWeekly < 10) {
     $warnings[] = 's3 weekly backup has ' . count($s3CountWeekly) . ' files in ' . $weeklyPath;
 }
 
