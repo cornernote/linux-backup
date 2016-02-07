@@ -50,6 +50,7 @@ Enter a **Policy Name** (can be the same as the username), then paste in the fol
 
 ```
 {
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
@@ -70,6 +71,7 @@ Paste the following into the **Policy Document**, then click **Apply Policy**.
 
 ```
 {
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
