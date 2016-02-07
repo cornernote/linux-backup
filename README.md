@@ -95,9 +95,10 @@ Thanks to Junda Ong for his [blog post](http://samwize.com/2013/04/21/s3cmd-brok
 Download and configure s3cmd:
 
 ```
-wget https://github.com/s3tools/s3cmd/archive/v1.5.0-rc1.tar.gz -O s3cmd-1.5.0-rc1.tar.gz
-tar xvfz s3cmd-1.5.0-rc1.tar.gz
-cd s3cmd-1.5.0-rc1/
+apt-get install python-setuptools
+wget https://github.com/s3tools/s3cmd/releases/download/v1.6.1/s3cmd-1.6.1.tar.gz
+tar xvfz s3cmd-1.6.1.tar.gz
+cd s3cmd-1.6.1/
 python setup.py install
 s3cmd --configure
 ```
