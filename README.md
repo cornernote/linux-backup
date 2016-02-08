@@ -143,6 +143,7 @@ It is **highly** recommended to setup a read-only AWS IAM user and insert the cr
 
 ```
 {
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
