@@ -9,7 +9,7 @@
 	- [Configure s3cmd](#configure-s3cmd)
 	- [Create AWS IAM User](#create-aws-iam-user-1)
 	- [Extend Nagios Timeout](#extend-nagios-timeout)
-	- [Testing Nagios Commands](#testing)
+	- [Testing Nagios Commands](#testing-nagios-commands)
 - [Support](#support)
 - [License](#license)
 	 
