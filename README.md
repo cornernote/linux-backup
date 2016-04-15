@@ -168,12 +168,14 @@ It is recommended to extend the NRPE timeout to avoid this error:
 CHECK_NRPE: Socket timeout after 10 seconds.
 ```
 
+#### Server
+
 Add to your nagios server `/etc/nagios3/commands.cfg`:
 
 ```
 define command{
-        command_name    check_nrpe_1arg_60sec
-        command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -t 60
+        command_name    check_nrpe_1arg_300sec
+        command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -t 300
         }
 ```        
 
@@ -181,6 +183,14 @@ Then replace `check_nrpe_1arg` with `check_nrpe_1arg_60sec` in your nagios check
 
 Visit [this article](http://deadlockprocess.wordpress.com/2010/07/11/how-to-fix-service-check-time-outs-in-nagios-nrpe-deployed-in-centosrhel-5/) or the [NRPE Documentation](http://nagios.sourceforge.net/docs/nrpe/NRPE.pdf) for more information on nagios timeouts.
 
+#### Client
+
+Update the NRPE config `/etc/nagios/nrpe.cfg`:
+
+```
+command_timeout=300
+connection_timeout=600
+```
 
 ### Testing Nagios Commands
 
