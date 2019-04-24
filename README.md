@@ -59,6 +59,36 @@ Enter a **Policy Name** (can be the same as the username), then paste in the fol
     }
   ]
 }
+
+OR
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::bucket-name"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::bucket-name/*"
+        }
+    ]
+}
 ```
 
 Note: this gives full permissions to all S3 buckets, which is required when verifying the s3cmd configuration (see steps below).
